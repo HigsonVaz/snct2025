@@ -43,7 +43,8 @@
             </a-cursor>
         </a-camera>
 
-<a-text value="CITHA - Tefé" position="-4 1 -5" color="blue" font="https://aframe.io/releases/1.2.0/font/mozillavr.fnt"></a-text>
+<a-entity position="-1 2 0"
+                text="width: 2; lineHeight: 50; letterSpacing: 5; color: white; value: [LINE AND LETTER SPACING] Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam">
         
         
 
@@ -88,5 +89,6 @@
         // Função para converter coordenadas 3D para 2D
         function worldToScreen(camera, position) {
             const vector = new THREE.Vector3();
+
 
 
