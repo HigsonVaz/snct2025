@@ -4,14 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Ambiente A-Frame VR - Popup no Clique</title>
-    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-        
+        html, body { width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; }
+        a-scene { width: 100vw; height: 100vh; display: block; }
         #popup-container {
             position: absolute;
             top: 0;
@@ -21,7 +17,6 @@
             pointer-events: none;
             z-index: 9999;
         }
-        
         .popup {
             position: absolute;
             background: rgba(0, 0, 0, 0.85);
@@ -37,18 +32,8 @@
             pointer-events: auto;
             display: none;
         }
-        
-        .popup-title {
-            font-weight: bold;
-            margin-bottom: 8px;
-            color: #00ff88;
-            font-size: 16px;
-        }
-        
-        .popup-desc {
-            line-height: 1.4;
-        }
-        
+        .popup-title { font-weight: bold; margin-bottom: 8px; color: #00ff88; font-size: 16px; }
+        .popup-desc { line-height: 1.4; }
         .popup-close {
             position: absolute;
             top: 5px;
@@ -61,7 +46,6 @@
     </style>
 </head>
 <body>
-    <!-- Container para popups -->
     <div id="popup-container"></div>
 
     <a-scene 
@@ -70,15 +54,8 @@
         embedded
         loading-screen="enabled: false">
 
-        <!-- Câmera com cursor para VR -->
         <a-entity id="rig" movement-controls position="0 1.6 0">
-            <a-entity 
-                camera 
-                look-controls 
-                position="0 0 0"
-                wasd-controls="fly: true">
-                
-                <!-- Cursor para desktop -->
+            <a-entity camera look-controls position="0 0 0" wasd-controls="fly: true">
                 <a-cursor 
                     id="cursor"
                     raycaster="objects: .interactive"
@@ -90,94 +67,32 @@
             </a-entity>
         </a-entity>
 
-        <!-- Céu -->
         <a-sky color="#87CEEB"></a-sky>
 
-        <!-- Chão -->
-        <a-plane 
-            position="0 0 0" 
-            rotation="-90 0 0" 
-            width="30" 
-            height="30" 
-            color="#7CFC00"
-            shadow="receive: true">
-        </a-plane>
+        <a-plane position="0 0 0" rotation="-90 0 0" width="30" height="30" color="#7CFC00" shadow="receive: true"></a-plane>
 
-        <!-- OBJETO 1: Cubo Vermelho -->
-        <a-box 
-            class="interactive"
-            position="-4 1.5 -5" 
-            width="1.5" 
-            height="1.5" 
-            depth="1.5" 
-            color="#FF4444"
-            shadow="cast: true"
-            data-title="Cubo Vermelho"
-            data-description="Sólido e estável, representa força e durabilidade em estruturas 3D. Forma básica fundamental na geometria.">
-        </a-box>
+        <a-box class="interactive" position="-4 1.5 -5" width="1.5" height="1.5" depth="1.5" color="#FF4444" shadow="cast: true"
+               data-title="Cubo Vermelho" data-description="Sólido e estável, representa força e durabilidade."></a-box>
 
-        <!-- OBJETO 2: Esfera Verde -->
-        <a-sphere 
-            class="interactive"
-            position="0 1.5 -5" 
-            radius="1" 
-            color="#44FF44"
-            shadow="cast: true"
-            data-title="Esfera Verde"
-            data-description="Forma perfeita sem arestas, simboliza harmonia e infinitas possibilidades. Superfície completamente lisa.">
-        </a-sphere>
+        <a-sphere class="interactive" position="0 1.5 -5" radius="1" color="#44FF44" shadow="cast: true"
+                  data-title="Esfera Verde" data-description="Forma perfeita sem arestas, simboliza harmonia."></a-sphere>
 
-        <!-- OBJETO 3: Cilindro Azul -->
-        <a-cylinder 
-            class="interactive"
-            position="4 1.5 -5" 
-            radius="0.8" 
-            height="2" 
-            color="#4444FF"
-            shadow="cast: true"
-            data-title="Cilindro Azul"
-            data-description="Combina retidão com suavidade, ideal para estruturas que necessitam de resistência. Base circular uniforme.">
-        </a-cylinder>
+        <a-cylinder class="interactive" position="4 1.5 -5" radius="0.8" height="2" color="#4444FF" shadow="cast: true"
+                    data-title="Cilindro Azul" data-description="Combina retidão com suavidade."></a-cylinder>
 
-        <!-- OBJETO 4: Cone Amarelo -->
-        <a-cone 
-            class="interactive"
-            position="-3 1 -7" 
-            radius-bottom="1" 
-            height="2" 
-            color="#FFFF44"
-            shadow="cast: true"
-            data-title="Cone Amarelo"
-            data-description="Representa direção e crescimento, apontando para objetivos específicos. Forma cônica perfeita.">
-        </a-cone>
+        <a-cone class="interactive" position="-3 1 -7" radius-bottom="1" height="2" color="#FFFF44" shadow="cast: true"
+                data-title="Cone Amarelo" data-description="Representa direção e crescimento."></a-cone>
 
-        <!-- OBJETO 5: Pirâmide Laranja -->
-        <a-pyramid 
-            class="interactive"
-            position="3 1 -7" 
-            width="1.5" 
-            height="2" 
-            depth="1.5" 
-            color="#FF8844"
-            shadow="cast: true"
-            data-title="Pirâmide Laranja"
-            data-description="Estrutura ancestral que representa sabedoria e estabilidade duradoura. Base quadrada sólida.">
-        </a-pyramid>
+        <!-- Substituí a-pyramid (inconsistente) por a-entity geometry -->
+        <a-entity class="interactive" position="3 1 -7" shadow="cast: true"
+                  geometry="primitive: box; width: 1.5; height: 2; depth: 1.5"
+                  material="color: #FF8844"
+                  data-title="Pirâmide Laranja"
+                  data-description="Estrutura que representa sabedoria e estabilidade."></a-entity>
 
-        <!-- OBJETO 6: Anel Dourado -->
-        <a-torus 
-            class="interactive"
-            position="0 2 -8" 
-            arc="360" 
-            radius="1.2" 
-            radius-tubular="0.2" 
-            color="#FFD700"
-            shadow="cast: true"
-            data-title="Anel Dourado"
-            data-description="Símbolo de eternidade e ciclos infinitos, perfeição em movimento contínuo. Forma toroidal completa.">
-        </a-torus>
+        <a-torus class="interactive" position="0 2 -8" arc="360" radius="1.2" radius-tubular="0.2" color="#FFD700" shadow="cast: true"
+                 data-title="Anel Dourado" data-description="Símbolo de eternidade e ciclos infinitos."></a-torus>
 
-        <!-- Iluminação -->
         <a-entity light="type: ambient; color: #888; intensity: 0.6"></a-entity>
         <a-entity light="type: directional; color: #FFF; intensity: 0.8" position="-5 8 5"></a-entity>
         <a-entity light="type: point; color: #FFF; intensity: 0.5" position="0 5 0"></a-entity>
@@ -185,191 +100,168 @@
     </a-scene>
 
     <script>
-        // Componente para gerenciar interações com popup no clique
-        AFRAME.registerComponent('object-interaction', {
-            init: function() {
-                this.el.addEventListener('click', this.showPopup.bind(this));
-                this.el.addEventListener('mouseenter', this.highlightObject.bind(this));
-                this.el.addEventListener('mouseleave', this.unhighlightObject.bind(this));
-            },
-            
-            highlightObject: function() {
-                // Efeito visual - destaque no hover
-                this.el.setAttribute('animation', {
-                    property: 'scale',
-                    to: '1.15 1.15 1.15',
-                    dur: 300,
-                    easing: 'easeOutElastic'
-                });
-            },
-            
-            unhighlightObject: function() {
-                // Volta ao tamanho normal
-                this.el.setAttribute('animation', {
-                    property: 'scale',
-                    to: '1 1 1',
-                    dur: 300,
-                    easing: 'easeOutElastic'
-                });
-            },
-            
-            showPopup: function(evt) {
-                // Remove popup anterior se existir
-                this.removeExistingPopup();
-                
-                // Obtém dados do objeto
-                const title = this.el.getAttribute('data-title');
-                const description = this.el.getAttribute('data-description');
-                const intersection = evt.detail.intersection;
-                
-                if (intersection && title && description) {
-                    // Converte coordenadas 3D para coordenadas de tela
-                    const screenPoint = this.worldToScreen(intersection.point);
-                    
-                    // Cria e posiciona o popup
-                    this.createPopup(title, description, screenPoint.x, screenPoint.y);
-                }
-            },
-            
-            worldToScreen: function(worldPos) {
-                const camera = document.querySelector('[camera]');
-                const scene = document.querySelector('a-scene');
-                
-                // Converte posição mundial para coordenadas de tela
-                const vector = new THREE.Vector3(worldPos.x, worldPos.y, worldPos.z);
-                vector.project(camera.getObject3D('camera'));
-                
-                return {
-                    x: (vector.x * 0.5 + 0.5) * window.innerWidth,
-                    y: -(vector.y * 0.5 - 0.5) * window.innerHeight
-                };
-            },
-            
-            createPopup: function(title, description, x, y) {
-                const popupContainer = document.getElementById('popup-container');
-                
-                // Cria elemento do popup
-                const popup = document.createElement('div');
-                popup.className = 'popup';
-                popup.style.display = 'block';
-                
-                // Conteúdo do popup
-                popup.innerHTML = `
-                    <div class="popup-close" onclick="this.parentElement.style.display='none'">×</div>
-                    <div class="popup-title">${title}</div>
-                    <div class="popup-desc">${description}</div>
-                `;
-                
-                // Posiciona o popup
-                this.positionPopup(popup, x, y);
-                
-                // Adiciona à cena
-                popupContainer.appendChild(popup);
-                
-                // Auto-remove após 8 segundos
-                setTimeout(() => {
-                    if (popup.parentElement) {
-                        popup.parentElement.removeChild(popup);
-                    }
-                }, 8000);
-            },
-            
-            positionPopup: function(popup, x, y) {
-                const margin = 20;
-                const popupWidth = 280;
-                const popupHeight = popup.offsetHeight;
-                
-                // Ajusta posição para não sair da tela
-                let finalX = x;
-                let finalY = y;
-                
-                // Verifica bordas da tela
-                if (finalX + popupWidth > window.innerWidth - margin) {
-                    finalX = window.innerWidth - popupWidth - margin;
-                }
-                if (finalX < margin) {
-                    finalX = margin;
-                }
-                if (finalY + popupHeight > window.innerHeight - margin) {
-                    finalY = window.innerHeight - popupHeight - margin;
-                }
-                if (finalY < margin) {
-                    finalY = margin;
-                }
-                
-                popup.style.left = finalX + 'px';
-                popup.style.top = finalY + 'px';
-            },
-            
-            removeExistingPopup: function() {
-                const popupContainer = document.getElementById('popup-container');
-                const existingPopups = popupContainer.querySelectorAll('.popup');
-                existingPopups.forEach(popup => {
-                    popupContainer.removeChild(popup);
-                });
+    AFRAME.registerComponent('object-interaction', {
+        init: function() {
+            this.el.addEventListener('click', this.showPopup.bind(this));
+            this.el.addEventListener('mouseenter', this.highlightObject.bind(this));
+            this.el.addEventListener('mouseleave', this.unhighlightObject.bind(this));
+        },
+
+        highlightObject: function() {
+            this.el.setAttribute('animation__hover', {
+                property: 'scale',
+                to: '1.15 1.15 1.15',
+                dur: 300,
+                easing: 'easeOutElastic'
+            });
+        },
+
+        unhighlightObject: function() {
+            this.el.setAttribute('animation__hover_out', {
+                property: 'scale',
+                to: '1 1 1',
+                dur: 300,
+                easing: 'easeOutElastic'
+            });
+        },
+
+        showPopup: function(evt) {
+            this.removeExistingPopup();
+
+            const title = this.el.getAttribute('data-title');
+            const description = this.el.getAttribute('data-description');
+
+            // obter ponto do intersection ou fallback para posição do objeto
+            let worldPoint = null;
+            if (evt && evt.detail && evt.detail.intersection && evt.detail.intersection.point) {
+                worldPoint = evt.detail.intersection.point;
+            } else if (this.el.object3D) {
+                // usa a posição mundial do objeto como fallback
+                const v = new AFRAME.THREE.Vector3();
+                this.el.object3D.getWorldPosition(v);
+                worldPoint = v;
             }
-        });
 
-        // Componente para controle em dispositivos móveis
-        AFRAME.registerComponent('movement-controls', {
-            init: function() {
-                // Configurações básicas para mobile
-                if (/Android|iPhone|iPad/.test(navigator.userAgent)) {
-                    this.setupMobileOptimizations();
-                }
-            },
-            
-            setupMobileOptimizations: function() {
-                // Reduz qualidade para melhor performance em mobile
-                const scene = this.el.sceneEl;
-                scene.setAttribute('renderer', 'antialias: false; colorManagement: true');
+            if (!title || !description || !worldPoint) { return; }
+
+            const screenPoint = this.worldToScreen(worldPoint);
+            this.createPopup(title, description, screenPoint.x, screenPoint.y);
+        },
+
+        worldToScreen: function(worldPos) {
+            const cameraEl = document.querySelector('[camera]');
+            const cameraObj = cameraEl && cameraEl.getObject3D && cameraEl.getObject3D('camera');
+            const three = AFRAME.THREE;
+
+            // fallback para centro de tela se não houver câmera
+            if (!cameraObj) {
+                return { x: window.innerWidth / 2, y: window.innerHeight / 2 };
             }
-        });
 
-        // Aplicar o componente a todos os objetos interativos
-        document.addEventListener('DOMContentLoaded', function() {
-            const interactiveObjects = document.querySelectorAll('.interactive');
-            interactiveObjects.forEach(obj => {
-                obj.setAttribute('object-interaction', '');
-            });
-            
-            // Fechar popup ao clicar fora (para desktop)
-            document.addEventListener('click', function(evt) {
-                if (!evt.target.closest('.popup') && !evt.target.closest('.interactive')) {
-                    const popupContainer = document.getElementById('popup-container');
-                    const popups = popupContainer.querySelectorAll('.popup');
-                    popups.forEach(popup => {
-                        popup.style.display = 'none';
-                    });
-                }
-            });
-            
-            // Para mobile: touch para fechar
-            document.addEventListener('touchend', function(evt) {
-                if (!evt.target.closest('.popup') && !evt.target.closest('.interactive')) {
-                    const popupContainer = document.getElementById('popup-container');
-                    const popups = popupContainer.querySelectorAll('.popup');
-                    popups.forEach(popup => {
-                        popup.style.display = 'none';
-                    });
-                }
-            });
-        });
+            const vector = new three.Vector3(worldPos.x, worldPos.y, worldPos.z);
+            vector.project(cameraObj);
 
-        // Otimizações para Android
-        if (/Android/.test(navigator.userAgent)) {
-            document.addEventListener('DOMContentLoaded', function() {
-                // Reduz sombras para melhor performance
-                const shadows = document.querySelectorAll('[shadow]');
-                shadows.forEach(shadow => {
-                    const cast = shadow.getAttribute('shadow').cast;
-                    const receive = shadow.getAttribute('shadow').receive;
-                    if (cast !== 'true' && receive !== 'true') {
-                        shadow.setAttribute('shadow', 'cast: false; receive: false');
-                    }
-                });
+            return {
+                x: (vector.x * 0.5 + 0.5) * window.innerWidth,
+                y: -(vector.y * 0.5 - 0.5) * window.innerHeight
+            };
+        },
+
+        createPopup: function(title, description, x, y) {
+            const popupContainer = document.getElementById('popup-container');
+
+            const popup = document.createElement('div');
+            popup.className = 'popup';
+            popup.style.display = 'block';
+            popup.innerHTML = `
+                <div class="popup-close" role="button" title="Fechar">×</div>
+                <div class="popup-title">${title}</div>
+                <div class="popup-desc">${description}</div>
+            `;
+
+            // pointer events enable somente para o popup
+            popupContainer.appendChild(popup);
+
+            // posiciona depois que está no DOM para ler offsetHeight corretamente
+            this.positionPopup(popup, x, y);
+
+            // fechar ao clicar no X
+            popup.querySelector('.popup-close').addEventListener('click', function() {
+                if (popup.parentElement) popup.parentElement.removeChild(popup);
             });
+
+            // auto-remove depois de 8s
+            setTimeout(() => {
+                if (popup.parentElement) popup.parentElement.removeChild(popup);
+            }, 8000);
+        },
+
+        positionPopup: function(popup, x, y) {
+            const margin = 20;
+            const popupWidth = 280;
+            const popupHeight = popup.offsetHeight || 120; // fallback
+
+            let finalX = x;
+            let finalY = y;
+
+            if (finalX + popupWidth > window.innerWidth - margin) {
+                finalX = window.innerWidth - popupWidth - margin;
+            }
+            if (finalX < margin) {
+                finalX = margin;
+            }
+            if (finalY + popupHeight > window.innerHeight - margin) {
+                finalY = window.innerHeight - popupHeight - margin;
+            }
+            if (finalY < margin) {
+                finalY = margin;
+            }
+
+            popup.style.left = finalX + 'px';
+            popup.style.top = finalY + 'px';
+        },
+
+        removeExistingPopup: function() {
+            const popupContainer = document.getElementById('popup-container');
+            const existing = popupContainer.querySelectorAll('.popup');
+            existing.forEach(p => p.parentElement && p.parentElement.removeChild(p));
         }
+    });
+
+    AFRAME.registerComponent('movement-controls', {
+        init: function() {
+            if (/Android|iPhone|iPad/i.test(navigator.userAgent)) {
+                this.setupMobileOptimizations();
+            }
+        },
+        setupMobileOptimizations: function() {
+            const scene = this.el.sceneEl;
+            if (scene) scene.setAttribute('renderer', 'antialias: false; colorManagement: true');
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const interactiveObjects = document.querySelectorAll('.interactive');
+        interactiveObjects.forEach(obj => {
+            obj.setAttribute('object-interaction', '');
+        });
+
+        document.addEventListener('click', function(evt) {
+            if (!evt.target.closest('.popup') && !evt.target.closest('.interactive')) {
+                const popupContainer = document.getElementById('popup-container');
+                const popups = popupContainer.querySelectorAll('.popup');
+                popups.forEach(p => { if (p.parentElement) p.parentElement.removeChild(p); });
+            }
+        });
+
+        document.addEventListener('touchend', function(evt) {
+            if (!evt.target.closest('.popup') && !evt.target.closest('.interactive')) {
+                const popupContainer = document.getElementById('popup-container');
+                const popups = popupContainer.querySelectorAll('.popup');
+                popups.forEach(p => { if (p.parentElement) p.parentElement.removeChild(p); });
+            }
+        });
+    });
     </script>
 </body>
 </html>
