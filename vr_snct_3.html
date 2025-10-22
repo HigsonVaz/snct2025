@@ -88,29 +88,9 @@
     <script>
         // Elementos do DOM
         const popup = document.getElementById('popup');
-        const cursor = document.getElementById('cursor');
+        const scene = document.querySelector('a-scene');
+        const camera = document.querySelector('a-camera');
 
         // Função para converter coordenadas 3D para 2D
         function worldToScreen(camera, position) {
             const vector = new THREE.Vector3();
-            const widthHalf = 0.5 * window.innerWidth;
-            const heightHalf = 0.5 * window.innerHeight;
-
-            position.project(camera);
-            vector.x = (position.x * widthHalf) + widthHalf;
-            vector.y = - (position.y * heightHalf) + heightHalf;
-
-            return {
-                x: vector.x,
-                y: vector.y
-            };
-        }
-
-        // Eventos para mostrar/ocultar popup
-        document.querySelectorAll('.clickable').forEach(object => {
-            object.addEventListener('mouseenter', function(evt) {
-                const title = this.getAttribute('data-title');
-                const description = this.getAttribute('data-description');
-                
-                // Pegar a posição 3D do objeto
-                cons
