@@ -43,17 +43,9 @@
             </a-cursor>
         </a-camera>
 
-<a-text value="CITHA - Tefé" position="0 2 -5" color="blue" font="https://aframe.io/releases/1.2.0/font/mozillavr.fnt"></a-text>
+<a-text value="CITHA - Tefé" position="-4 1 -5" color="blue" font="https://aframe.io/releases/1.2.0/font/mozillavr.fnt"></a-text>
         
-        <!-- Chão -->
-        <a-plane 
-            position="0 0 0" 
-            rotation="-90 0 0" 
-            width="20" 
-            height="20" 
-            color="#336633"
-            shadow>
-        </a-plane>
+        
 
         <!-- Objeto 1: Cubo -->
         <a-box 
@@ -96,4 +88,5 @@
         // Função para converter coordenadas 3D para 2D
         function worldToScreen(camera, position) {
             const vector = new THREE.Vector3();
+
 
